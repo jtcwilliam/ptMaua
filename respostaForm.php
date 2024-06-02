@@ -8,22 +8,15 @@ session_start();
 
 
 
- 
 
- 
 
-if($_SESSION['usuario']['0']['status'] == null  ||   $_SESSION['usuario']['0']['status'] == '0' )
-{
-     
-  //  header("Location: negado.php");
+
+
+if ($_SESSION['usuario']['0']['status'] == null  ||   $_SESSION['usuario']['0']['status'] == '0') {
+
+    header("Location: negado.php");
     die();
-
 }
- 
-
-//if(isset($_SESSION['usuario']['0']['']))
- 
-
 
 
 if ($_SESSION['eixo1'] == false) {
@@ -144,7 +137,7 @@ if (isset($_POST['carregarConteudo'])) {
 
                         </div>
                     </div>
-                    <div class="grid-x grid-padding-x" style="padding-top: 30px;" id="caixaProposta">
+                    <div class="grid-x grid-padding-x" style="padding-top: 30px; display: none;" id="caixaProposta">
                         <div class="medium-12 cell">
                             <label>
                                 <h5><b> Escreva sua proposta e idéia</b></h5>
@@ -215,7 +208,7 @@ include './assets/head.php';
 
 <script>
     $(document).ready(function() {
-        $('#caixaProposta').hide();
+
 
 
         $('#txtCpf').mask('000.000.000.00', {
@@ -229,8 +222,12 @@ include './assets/head.php';
 
         //txtCelular
 
+        $('#caixaProposta').hide();
+
 
     })
+
+    $('#caixaProposta').hide();
 
     function carregarExplicacao(idSubEixo) {
 
@@ -335,7 +332,7 @@ include './assets/head.php';
             });
     }
 
- 
+
 
 
 
