@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 include 'models/forms.php';
 $objForms = new Forms();
@@ -8,13 +11,13 @@ if (isset($_POST['verificarCPF__'])) {
 
     $dadosUsuario = $objForms->carregarUsuarioFormulario($_POST['cpf']);
 
-    
+
 
     if ($dadosUsuario['retorno'] == false) {
 
-        echo json_encode(array('retorno' => true, 'cpf'=>$_POST['cpf'] ));
+        echo json_encode(array('retorno' => true, 'cpf' => $_POST['cpf']));
         die();
-    }else{
+    } else {
         echo json_encode(array('retorno' => false));
         die();
     }
@@ -34,9 +37,20 @@ include './assets/head.php';
 ?>
 
 
-<body>
+<body style="background-color: #ececec;">
 
     <div class="grid-container">
+
+
+        <?php
+
+                include 'assets/layoutTop.php';
+
+        ?>
+
+
+   
+
         <div class="grid-x grid-padding-x">
             <div class="large-12 cell">
 
@@ -46,9 +60,6 @@ include './assets/head.php';
 
                 <fieldset class="fieldset">
 
-                    <legend>
-                        <h4><B>Por favor informe seus dados </B></h4>
-                    </legend>
 
 
 
@@ -72,7 +83,7 @@ include './assets/head.php';
 
 
                                         <div class="medium-12 cell">
-                                            <label>CPF
+                                            <label>Para iniciar, por favor, informe seu CPF
                                                 <input type="text" placeholder="Digite seu nome" id="txtCpf" name="txtCpf" require class="textsForms">
                                             </label>
                                         </div>
@@ -143,8 +154,8 @@ include './assets/head.php';
                 console.log(data);
 
                 if (data.retorno == true) {
-                    window.location.href = "cadastrarUsuario.php?cpf="+data.cpf;
-                }else{
+                    window.location.href = "cadastrarUsuario.php?cpf=" + data.cpf;
+                } else {
                     alert('Olá. Sua Participação ja foi registrada');
                 }
 

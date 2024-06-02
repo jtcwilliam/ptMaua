@@ -24,7 +24,8 @@ class Forms
     function __construct()
     {
         // importar a classe conexao
-        include_once 'Db.php';
+
+        require_once(__DIR__.'/db.php');
         //criar uma instancia de conexao;
         $objConectar = new Conexao();
 
