@@ -37,31 +37,23 @@ include './assets/head.php';
 ?>
 
 
-<body style="background-color: #ececec;">
+<body>
 
-    <div class="grid-container">
+    <div class="container" style="height: 100vh; display: grid; align-items: center;">
 
-
-        <?php
-
-                include 'assets/layoutTop.php';
-
-        ?>
+        <div class="grid-container ">
 
 
-   
+            <?php
 
-        <div class="grid-x grid-padding-x">
-            <div class="large-12 cell">
+
+            ?>
 
 
 
 
-
-                <fieldset class="fieldset">
-
-
-
+            <div class="grid-x grid-padding-x">
+                <div class="large-12 cell">
 
 
                     <form>
@@ -69,53 +61,56 @@ include './assets/head.php';
 
                             <div class="grid-x grid-padding-x">
 
-                                <div class=" cell auto">
+                                <div class=" small-12 medium-6 large-5 cell" style="display: grid; align-items: center; justify-items: center;">
+                                    <img src="imgs/logoPL.png" class="logoJuntos" style="width: 50%; padding-bottom: 30px;" />
+
+
                                 </div>
-                                <div class="small-12 medium-6 large-6 cell">
+                                <div class="small-12 medium-6 large-5 cell">
+                                    <div class="translucent-form-overlay">
 
 
 
 
-
-
-                                    <div class="grid-x grid-padding-x">
+                                        <div class="grid-x grid-padding-x">
 
 
 
-                                        <div class="medium-12 cell">
-                                            <label>Para iniciar, por favor, informe seu CPF
-                                                <input type="text" placeholder="Digite seu nome" id="txtCpf" name="txtCpf" require class="textsForms">
-                                            </label>
+                                            <div class="medium-12 cell">
+                                                <label>Para iniciar, por favor, informe seu CPF
+                                                    <input type="text" placeholder="Digite seu nome" id="txtCpf" name="txtCpf" require class="textsForms">
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="grid-x grid-padding-x">
+
+                                            <div class="medium-12 cell">
+                                                <center>
+                                                    <a onclick="verificarCPF()" class="button succes" style="border-radius: 10px;">Vamos verificar seu acesso</a>
+                                                </center>
+
+                                            </div>
                                         </div>
 
                                     </div>
-
-
-                                    <div class="grid-x grid-padding-x">
-
-                                        <div class="medium-12 cell">
-                                            <center>
-                                                <a onclick="verificarCPF()" class="button succes" style="border-radius: 10px;">Vamos verificar seu acesso</a>
-                                            </center>
-
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class=" cell auto">
-                                </div>
+
                             </div>
                     </form>
 
-                </fieldset>
 
+
+                </div>
             </div>
         </div>
+
+        <?php
+        //  include './assets/footer.php';
+        ?>
     </div>
-
-    <?php
-    include './assets/footer.php';
-    ?>
-
 </body>
 
 <script>

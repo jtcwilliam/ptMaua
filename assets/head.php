@@ -14,35 +14,84 @@
     <script src="assets/js/jquery.mask.js"></script>
 
     <style>
+        body {
+          
+
+            background-image: url(imgs/imgFundo.jpg);  
+            background-size: cover; 
+            
+        }
+
+        
+
+
         #Footer {
             position: fixed;
             bottom: 0;
             width: 100%;
         }
 
-        .textsForms{
-            background-color: #ffffff; border-radius: 10px;
+        .textsForms {
+            background-color: #ffffff;
+            border-radius: 10px;
         }
 
 
-        .barraFooter{
+        .barraFooter {
             height: 20vh;
-          
+
         }
 
         @media (max-width: 1024px) {
             .barraLogos {
-               display: grid;
-               justify-items :center;
-               padding: 10px;
+                display: grid;
+                justify-items: center;
+                padding: 10px;
             }
-            .barraFooter{
+
+            .barraFooter {
                 height: 40vh;
             }
-           
-            
 
 
+
+
+        }
+
+
+
+        .translucent-form-overlay {
+            max-width: 500px;
+            width: 100%;
+            background-color: rgba(54, 54, 54, 0.8);
+            padding: 20px;
+            color: #fefefe;
+        }
+
+        .translucent-form-overlay .columns.row {
+            display: block;
+        }
+
+        .translucent-form-overlay h3,
+        .translucent-form-overlay label {
+            color: #fefefe;
+        }
+
+        .translucent-form-overlay input,
+        .translucent-form-overlay select {
+            color: #8a8a8a;
+        }
+
+        .translucent-form-overlay input::-webkit-input-placeholder {
+            color: #8a8a8a;
+        }
+
+        .translucent-form-overlay input:-ms-input-placeholder {
+            color: #8a8a8a;
+        }
+
+        .translucent-form-overlay input::placeholder {
+            color: #8a8a8a;
         }
     </style>
 

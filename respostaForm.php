@@ -10,25 +10,58 @@ session_start();
 
 
 
-
-
-if ($_SESSION['usuario']['0']['status'] == null  ||   $_SESSION['usuario']['0']['status'] == '0') {
+if ($_SESSION['usuario']['0']['status'] == null) {
 
     header("Location: negado.php");
     die();
 }
 
 
-if ($_SESSION['eixo1'] == false) {
-    $eixo = 1;
-    $labelEixo = "INFRAESTRURA";
-} elseif ($_SESSION['eixo2'] == false) {
-    $eixo = 2;
-    $labelEixo = "POLÍTICAS PÚBLICAS E CIDADANIA";
-} elseif ($_SESSION['eixo3'] == false) {
-    $eixo = 3;
-    $labelEixo = "TRANSPARÊNCIA E PARTICIPAÇÃO";
+if (isset($_POST['verificarRespondida'])) {
+
+
+    $objSubEixo->setIdEixo($_GET['eixo']);
+    $respondida =   $objSubEixo->verificarRespondida();
+
+
+
+    if ($respondida['retorno'] == false) {
+        echo json_encode(array('retorno' => true));
+    } else {
+        echo json_encode(array('retorno' => false));
+    }
+
+    die();
 }
+
+
+switch ($_GET['eixo']) {
+    case '1':
+        $eixo = 1;
+        $labelEixo = "INFRAESTRURA";
+
+
+        break;
+
+    case '2':
+        $eixo = 2;
+        $labelEixo = "POLÍTICAS PÚBLICAS E CIDADANIA";
+
+
+        break;
+
+    case '3':
+        $eixo = 3;
+        $labelEixo = "TRANSPARÊNCIA E PARTICIPAÇÃO";
+
+        break;
+
+    default:
+        # code...
+        break;
+}
+
+
 
 if (isset($_POST['Resposta'])) {
 
@@ -92,71 +125,73 @@ if (isset($_POST['carregarConteudo'])) {
 
     <legend>
         <center>
-            <h3>Propostas para <?= $labelEixo ?></h3>
+            <h3>Propostas para o Eixo <B><?= $labelEixo ?></B></h3>
         </center>
     </legend>
     <form action="form_controller.php" enctype="multipart/form-data" method="post">
         <div class="grid-container">
 
-            <div class="grid-x grid-padding-x">
-
-
+            <div class="container">
                 <div class="small-12 medium-12 large-12 cell">
-                    <div class="grid-x grid-padding-x">
-                        <div class="medium-12 cell">
-                            <label>
-                                <h5><b>Selecione uma Proposta</b></h5>
-
-                                <input type="hidden" id="eixoForm" value="<?= $eixo ?>" />
-
-                                <input type="hidden" id="idFormulario" value="<?= $_SESSION['usuario']['0']['idformulario'] ?>" />
 
 
-                                <select onchange="carregarExplicacao(this.value)" id="cbSubEixo">
-                                    <option value="0">Selecione</option>
-                                    <?php
+                    <div class="small-12 medium-12 large-12 cell">
+                        <div class="grid-x grid-padding-x">
+                            <div class="medium-12 cell">
+                                <label>
+                                    <h5><b>Selecione uma Proposta</b></h5>
+
+                                    <input type="hidden" id="eixoForm" value="<?= $eixo ?>" />
+
+
+                                    <input type="hidden" id="idFormulario" value="<?= $_SESSION['usuario']['0']['idformulario'] ?>" />
+
+
+                                    <select onchange="carregarExplicacao(this.value)" id="cbSubEixo">
+                                        <option value="0">Selecione</option>
+                                        <?php
 
 
 
-                                    $dadosEixo = $objSubEixo->comboEixo($eixo);
-                                    foreach ($dadosEixo as $key => $value) {
-                                    ?>
-                                        <option value="<?= $dadosEixo[$key]['idsubEixo']; ?>"> <?= $dadosEixo[$key]['subEixoDescricao'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </label>
+                                        $dadosEixo = $objSubEixo->comboEixo($eixo);
+                                        foreach ($dadosEixo as $key => $value) {
+                                        ?>
+                                            <option value="<?= $dadosEixo[$key]['idsubEixo']; ?>"> <?= $dadosEixo[$key]['subEixoDescricao'] ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid-x grid-padding-x">
+                        <div class="grid-x grid-padding-x">
 
-                        <div class="medium-12 cell">
+                            <div class="medium-12 cell">
 
-                            <div id="explicacao" class="textsForms"></div>
+                                <div id="explicacao" class="textsForms" style="background-color: rgba(255,255,255,0.4); padding: 20px; font-size: 1.3em;"></div>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid-x grid-padding-x" style="padding-top: 30px; display: none;" id="caixaProposta">
-                        <div class="medium-12 cell">
-                            <label>
-                                <h5><b> Escreva sua proposta e idéia</b></h5>
-                            </label>
-                            <textarea rows="10" id="propostaEscrever"></textarea>
-                            </label>
+                        <div class="grid-x grid-padding-x" style="padding-top: 30px; display: none;" id="caixaProposta">
+                            <div class="medium-12 cell">
+                                <label>
+                                    <h5><b> Escreva sua proposta e idéia</b></h5>
+                                </label>
+                                <textarea rows="10" id="propostaEscrever"></textarea>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="grid-x grid-padding-x">
+                        <div class="grid-x grid-padding-x">
 
-                        <div class="medium-12 cell">
-                            <center>
-                                <a onclick="gravarFormulario()" class="button succes" style="border-radius: 10px;" value="Cadastrar  dados Pessoais">Gravar Resposta</a>
-                            </center>
+                            <div class="medium-12 cell">
+                                <center>
+                                    <a onclick="gravarFormulario()" class="button succes" style="border-radius: 10px;" value="Cadastrar  dados Pessoais">Gravar Resposta</a>
+                                </center>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
     </form>
 
 
@@ -180,12 +215,32 @@ include './assets/head.php';
 ?>
 
 <body>
-    <div class="grid-container">
+    <div class="grid-container" style="display: grid; align-items: center; height: 100vh;">
         <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <fieldset class="fieldset" style="width: 100%;">
+                    <legend>
+                        <center>
+                            <h3>Escolha Um eixo para registrar sua idéia!</h3>
+                        </center>
+                    </legend>
+                    <center>
+                        <a class="button small large-only-expanded" href="respostaForm.php?eixo=1">Proposta para Infraestrutura</a>
+                        <a class="button small large-only-expanded" href="respostaForm.php?eixo=2">Proposta para POLÍTICAS PÚBLICAS E CIDADANIA</a>
+                        <a class="button small large-only-expanded" href="respostaForm.php?eixo=3">Proposta para TRANSPARÊNCIA E PARTICIPAÇÃO</a>
+
+                    </center>
+                </fieldset>
+            </div>
+
+            <div class="grid-x grid-padding-x">
+
+
+            </div>
             <div class="large-12 cell">
 
 
-                <fieldset class="fieldset">
+                <fieldset>
                     <div id="conteudo">
 
                     </div>
@@ -266,7 +321,7 @@ include './assets/head.php';
         };
         $.ajax({
                 type: 'POST',
-                url: 'respostaForm.php',
+                url: 'respostaForm.php?eixo=<?= $_GET['eixo'] ?>',
                 data: formData,
                 dataType: 'json',
                 encode: true
@@ -276,18 +331,10 @@ include './assets/head.php';
                 console.log(data);
 
 
-                if (data.eixofinal == '3') {
 
 
-                    window.location.href = "confirmacao.php";
+                carregarConteudo();
 
-
-
-                    $('#conteudo').html('<h1>Sua participação está finalizada');
-                } else {
-
-                    carregarConteudo();
-                }
 
 
 
@@ -302,7 +349,7 @@ include './assets/head.php';
         };
         $.ajax({
                 type: 'POST',
-                url: 'respostaForm.php',
+                url: 'respostaForm.php?eixo=<?= $_GET['eixo'] ?>',
                 data: formData,
                 dataType: 'html',
                 encode: true
@@ -313,30 +360,55 @@ include './assets/head.php';
             });
     }
 
-
-    function verificarAcesso() {
+    function verificarRespondida() {
         var formData = {
 
-            verificarAcesso: '1'
+            verificarRespondida: '1'
         };
         $.ajax({
                 type: 'POST',
-                url: 'respostaForm.php',
+                url: 'respostaForm.php?eixo=<?= $_GET['eixo'] ?>',
                 data: formData,
-                dataType: 'html',
+                dataType: 'json',
                 encode: true
             })
             .done(function(data) {
 
-                $('#conteudo').html(data);
+                console.log(data);
+
+                switch (<?= $_GET['eixo'] ?>) {
+                    case 1:
+
+                        textoForm = 'Infra estrutura';
+
+
+                        break;
+                    case 2:
+
+                        textoForm = 'Politicas Públicas e Cidadania';
+
+
+                        break;
+
+                    case 3:
+
+                        textoForm = 'Transparência e Participação';
+
+
+                        break;
+                }
+
+                if (data.retorno == false) {
+                    alert('Você já respondeu sobre  ' + textoForm + '  ! Por Favor, escolha Outro');
+                } else {
+                    carregarConteudo();
+                }
             });
     }
 
 
 
-
-
-    carregarConteudo();
+    verificarRespondida();
 </script>
 
 

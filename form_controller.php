@@ -25,63 +25,73 @@ include './assets/head.php';
 
 
 
-                    <form action="form_controller.php" enctype="multipart/form-data" method="post">
-                        <div class="grid-container">
 
-                            <div class="grid-x grid-padding-x">
+                    <div class="grid-container">
 
-                                <div class="small-12 medium-12 large-12 cell">
+                        <div class="grid-x grid-padding-x">
 
-
-                                    <?php
-
-                                    include 'models/forms.php';
-                                    $objForms = new Forms();
-
-                                    $nome = $_REQUEST['txtNome'];
-
-                                    $email = $_REQUEST['txtEmail'];
-
-                                    $celular = $_REQUEST['txtCelular'];
-
-                                    $cpf = $_REQUEST['txtCpf'];
+                            <div class="small-12 medium-12 large-12 cell">
 
 
-                                    $objForms->setNome($nome);
-                                    $objForms->setEmail($email);
-                                    $objForms->setCelular($celular);
-                                    $objForms->setCpf($cpf);
+                                <?php
+
+                                include 'models/forms.php';
+                                $objForms = new Forms();
+
+                                $nome = $_REQUEST['txtNome'];
+
+                                $email = $_REQUEST['txtEmail'];
+
+                                $celular = $_REQUEST['txtCelular'];
+
+                                $cpf = $_REQUEST['txtCpf'];
+
+
+                                $objForms->setNome($nome);
+                                $objForms->setEmail($email);
+                                $objForms->setCelular($celular);
+                                $objForms->setCpf($cpf);
 
 
 
-                                    if ($objForms->inserirForms() == true) {
-                                        
+                                if ($objForms->inserirForms() == true) {
 
-                                        $dadosUsuario = $objForms->carregarUsuarioFormulario($cpf);
 
-                                        session_start();
-                                        $_SESSION['usuario'] = $dadosUsuario;
-                                        $_SESSION['eixo1'] = false;
-                                        $_SESSION['eixo2'] = false;
-                                        $_SESSION['eixo3'] = false;
-                                    }
-                                    ?>
+                                    $dadosUsuario = $objForms->carregarUsuarioFormulario($cpf);
 
-                                    <script>
-                                        alert('Obrigado. Agora que você está registrado, gostariamos de receber suas opniões');
-                                           window.location.href = "respostaForm.php";
+                                    session_start();
+                                    $_SESSION['usuario'] = $dadosUsuario;
+                                    $_SESSION['eixo1'] = false;
+                                    $_SESSION['eixo2'] = false;
+                                    $_SESSION['eixo3'] = false;
+                                }
+                                ?>
 
-                                    </script>
 
-                                </div>
 
 
                             </div>
 
-                    </form>
+
+                        </div>
 
 
 
+
+
+                </fieldset>
+                <fieldset class="fieldset" style="width: 100%;">
+                    <legend>
+                        <center>
+                            <h3>Escolha Um eixo para registrar sua idéia!</h3>
+                        </center>
+                    </legend>
+                    <center>
+                        <a class="button small large-only-expanded" href="respostaForm.php?eixo=1">Proposta para Infraestrutura</a>
+                        <a class="button small large-only-expanded" href="respostaForm.php?eixo=2">Proposta para POLÍTICAS PÚBLICAS E CIDADANIA</a>
+                        <a class="button small large-only-expanded" href="respostaForm.php?eixo=3">Proposta para TRANSPARÊNCIA E PARTICIPAÇÃO</a>
+
+                    </center>
                 </fieldset>
 
 

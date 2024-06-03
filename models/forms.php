@@ -106,7 +106,24 @@ class Forms
     {
         $sql = "select    *  from formulario      where cpf = '" . $cpf . "'";
 
+        $executar = mysqli_query($this->getConexao(), $sql);
 
+        $dados['retorno'] = false;
+
+        while ($row = mysqli_fetch_assoc($executar)) {
+
+            $dados['retorno'] = true;
+
+            $dados[] =  $row;
+        }
+
+        return $dados;
+    }
+
+
+    public function verificarRespondida()
+    {
+        $sql = "  SELECT * FROM resposta where idEixo = ".$this->getIdEixo()  ." and status = 0";
 
         $executar = mysqli_query($this->getConexao(), $sql);
 
@@ -126,8 +143,8 @@ class Forms
     public function inserirResposta()
     {
         try {
-            $sql = "INSERT INTO resposta (idEixo, idSubEixo, Resposta, idFormulario) 
-        VALUES ('" . $this->getIdEixo() . "', '" . $this->getIdSubEixo() . "','" . $this->getResposta() . "', '" . $this->getIdFormulario() . "')";
+            $sql = "INSERT INTO resposta (idEixo, idSubEixo, Resposta, idFormulario, status) 
+        VALUES ('" . $this->getIdEixo() . "', '" . $this->getIdSubEixo() . "','" . $this->getResposta() . "', '" . $this->getIdFormulario() . "','0')";
 
             $executar = mysqli_query($this->getConexao(), $sql);
             if ($executar == true) {

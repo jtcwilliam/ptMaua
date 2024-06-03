@@ -11,35 +11,23 @@ include './assets/head.php';
 <body>
 
   <div class="grid-container">
-    <div class="grid-x grid-padding-x">
+    <div class="grid-x grid-padding-x" style="display: grid; align-items: center; justify-items: center; height: 100vh;">
+
+      <div class="large-12 cell">
+        <center>
+          <img src="imgs/logoPL.png" style="height: 14vh;" />
+          
+          <h5 style="padding-top: 60px; font-weight: 700;">Obrigado por sua participação!<br> Sua Opinião é extremamente importante  fará a diferença!</h5>
+          
+        </center>
+
+
+      </div>
       <div class="large-12 cell">
 
-
-
-
-
-        <fieldset class="fieldset">
-
-          <legend>
-            <h3><B>Olá</B></h3>
-          </legend>
-
-          <center><h5>Obrigado por sua participação</h5></center>
-
-
-
-      
-
-
-        </fieldset>
-
-
-
-
-
-
-
-
+        <center>
+       
+        </center>
       </div>
     </div>
   </div>
@@ -53,7 +41,7 @@ include './assets/head.php';
 
 
   <?php
-  include './assets/footer.php';
+  // include './assets/footer.php';
   ?>
 
 
